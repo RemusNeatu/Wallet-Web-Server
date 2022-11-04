@@ -28,10 +28,9 @@ export class ExpressResponseFactory {
                 if (walletResponse.status == Constants.HTTP_OK) {
                     // Valid request for a wallet balance.
                     response.json({
-                        transactionId:
-                            walletResponse.wallet?.getTransactionId(),
-                        version: walletResponse.wallet?.getVersion(),
-                        coins: walletResponse.wallet?.getCoins(),
+                        transactionId: walletResponse.wallet?.transaction_id,
+                        version: walletResponse.wallet?.version,
+                        coins: walletResponse.wallet?.coins,
                     });
                 } else {
                     // Invalid request for a wallet balance.
@@ -40,7 +39,7 @@ export class ExpressResponseFactory {
                 break;
             case Command.CREDIT:
                 // Valid credit request.
-                response.send(walletResponse.wallet?.getCoins().toString());
+                response.send(walletResponse.wallet?.coins.toString());
                 break;
             case Command.DEBIT:
                 if (walletResponse.status == Constants.HTTP_NOT_FOUND) {
@@ -55,7 +54,7 @@ export class ExpressResponseFactory {
                     );
                 } else {
                     // Valid debit request.
-                    response.send(walletResponse.wallet?.getCoins().toString());
+                    response.send(walletResponse.wallet?.coins.toString());
                 }
                 break;
             default:

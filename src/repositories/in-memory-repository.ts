@@ -1,4 +1,4 @@
-import { Wallet } from "./domain/wallet";
+import { Wallet } from "../domain/wallet";
 
 type example = {
     id: number;
